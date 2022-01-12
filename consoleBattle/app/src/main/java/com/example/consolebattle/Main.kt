@@ -1,12 +1,33 @@
 package com.example.consolebattle
 
+import kotlin.random.Random
+
 fun main() {
+    println(
+        """
+    ${Ammo.pistolCartridges.getDamaged()}
+    ${Ammo.pistolCartridges.getDamaged()}
+    ____________________________________
+    ${Ammo.revolvingСartridges.getDamaged()}
+    ${Ammo.revolvingСartridges.getDamaged()}
+    ____________________________________
+    ${Ammo.rifleCartridges.getDamaged()}
+    ${Ammo.rifleCartridges.getDamaged()}
+    """.trimIndent()
+    )
 
-    var stack: Stack<Any> = Stack()
-    stack.push(2)
-    stack.push(8)
-    stack.push("hello world")
-    println(stack.pop())
-    println(stack.isEmpty())
 
+}
+
+//fun Int.isEven(): Boolean {
+//    return when {
+//        Random.nextInt(0, this) % 2 == 0 -> true
+//        else -> false
+//    }
+//}
+fun Int.isEvent(): Boolean {
+    return when {
+        Random.nextInt(0, this) % (100 / this) == 0 -> true
+        else -> false
+    }
 }
