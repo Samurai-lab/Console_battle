@@ -1,5 +1,7 @@
 package com.example.consolebattle
 
+import java.util.*
+
 enum class Ammo(val damage: Int, val criticalHitChance: Int, val criticalDamageCoefficient: Int) {
 
     PISTOL_CARTRIDGES(damage = 20, criticalHitChance = 10, criticalDamageCoefficient = 2),
@@ -12,5 +14,10 @@ enum class Ammo(val damage: Int, val criticalHitChance: Int, val criticalDamageC
             else -> damage
         }
         return returnedDamage
+    }
+
+    fun randomBullet():Ammo {
+        val elements = listOf(PISTOL_CARTRIDGES, REVOLVING_CARTRIDGES, RIFLE_CARTRIDGES)
+        return elements[(0..2).random()]
     }
 }

@@ -23,5 +23,7 @@ class Stack<E> {
         }
     }
 
+    fun getSize () = stack.size
+
     fun allElements() = println(stack)
 }

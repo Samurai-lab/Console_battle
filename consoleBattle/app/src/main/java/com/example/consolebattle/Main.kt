@@ -4,8 +4,21 @@ import kotlin.random.Random
 
 fun main() {
 
-    val pistol: Ammo = Ammo.PISTOL_CARTRIDGES
-   println(typeOfFire(FireType.SingleShot, 3))
+//    val pistol: Ammo = Ammo.PISTOL_CARTRIDGES
+//   println(typeOfFire(FireType.SingleShot, 3))
+
+
+    val weapon = AbstractWeapon(6, FireType.Queue(3), Stack(), true)
+
+    weapon.fire()
+    weapon.reloadMagazine()
+    weapon.typeOfBullet(Ammo.REVOLVING_CARTRIDGES)
+    weapon.reloadMagazine()
+    weapon.checkMagazine()
+    weapon.fire()
+    weapon.checkMagazine()
+    weapon.fire()
+    weapon.reloadMagazine()
 
 }
 

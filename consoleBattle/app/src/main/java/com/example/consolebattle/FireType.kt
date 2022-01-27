@@ -1,6 +1,6 @@
 package com.example.consolebattle
 
-sealed class FireType (count: Int){
+sealed class FireType (private val count: Int){
 
     object SingleShot: FireType(1)
 
