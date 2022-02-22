@@ -1,6 +1,7 @@
 package com.example.consolebattle
 
-class AbstractWeapon (
+//Task 4
+class AbstractWeapon(
     private val maxBullet: Int,
     private val fireType: FireType,
     private val cartridgeMagazine: Stack<Ammo>,
@@ -8,23 +9,29 @@ class AbstractWeapon (
 ) {
 
     private lateinit var typeOfAmmo: Ammo
-     fun typeOfBullet(type:Ammo): Ammo {
-         typeOfAmmo = type
+
+     fun typeOfBullet(type: Ammo): Ammo {
+        typeOfAmmo = type
         return type
+    }
+
+    fun getMagazine(): Stack<Ammo> {
+        return cartridgeMagazine
     }
 
     fun reloadMagazine() {
         if (::typeOfAmmo.isInitialized) {
-                for(i in 0 until maxBullet) {
-                    cartridgeMagazine.push(typeOfBullet(typeOfAmmo))
-                }
-                println("Your magazine is full")
+            for (i in 0 until maxBullet) {
+                cartridgeMagazine.push(typeOfBullet(typeOfAmmo))
+            }
+            println("Reloading... \nYour magazine is full")
+
         } else {
             println("You should choose type of bullets")
         }
     }
 
-    fun checkMagazine ():Boolean {
+    fun checkMagazine(): Boolean {
         when (cartridgeMagazine.getSize() > 0) {
             true -> println("You have bullets on your magazine - ${cartridgeMagazine.getSize()}")
             else -> println("Your magazine is empty")
@@ -32,22 +39,24 @@ class AbstractWeapon (
         return magazineIsEmpty == cartridgeMagazine.getSize() <= 0
     }
 
-    fun fire () {
-        for (i in 0 until typeOfFire()) {
-        if (cartridgeMagazine.isEmpty()) {
-            checkMagazine()
-            break
-        } else {
-               cartridgeMagazine.pop()
+    fun fire() {
+        for (i in 0 until typeOfFire(fireType).count) {
+            if (cartridgeMagazine.isEmpty()) {
+                checkMagazine()
+                return
+                break
+            } else {
+                cartridgeMagazine.pop()
                 println("Bump!")
             }
         }
     }
 
-    private fun typeOfFire(): Int =
-         when (fireType) {
-            FireType.SingleShot -> 1
-             //Should to use from FireType!!!!!!!!!!!!!
-            is FireType.Queue -> 3
+    private fun typeOfFire(fireType: FireType): FireType =
+        when (fireType) {
+            FireType.SingleShot -> FireType.SingleShot
+            is FireType.Queue -> fireType
         }
+
+
 }

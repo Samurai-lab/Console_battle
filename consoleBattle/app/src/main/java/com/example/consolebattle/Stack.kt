@@ -1,11 +1,16 @@
 package com.example.consolebattle
 
+//Task 1
 class Stack<E> {
 
     private var stack: MutableList<E> = mutableListOf()
 
     fun push(item: E) {
         stack.add(item)
+    }
+
+    fun getLast(): E? {
+        return stack[stack.size]
     }
 
     fun pop(): E? {
