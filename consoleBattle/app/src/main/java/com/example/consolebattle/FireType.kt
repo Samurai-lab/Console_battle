@@ -1,9 +1,9 @@
 package com.example.consolebattle
 
-sealed class FireType (count: Int){
+//Task 3
+sealed class FireType(val count: Int) {
 
-    object SingleShot: FireType(1)
+    object SingleShot : FireType(1)
 
-    data class Queue(val typeOfQueue: Int): FireType(typeOfQueue)
-
+    data class Queue(val typeOfQueue: Int) : FireType(typeOfQueue)
 }
