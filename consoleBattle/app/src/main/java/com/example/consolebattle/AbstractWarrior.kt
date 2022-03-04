@@ -16,7 +16,7 @@ abstract class AbstractWarrior(
             //Переделать рандомайз
             if (accuracy.isEvent() && evasion.isEvent()) {
                 //Урон может быть больше здоровья
-                topicalHealth -=  weapon.getMagazine().getLast()!!.getDamaged() * weapon.getMagazine().getSize()
+                topicalHealth -=  weapon.getBulletType().getDamaged()
             } else {
                 println("You missed")
             }
@@ -26,7 +26,16 @@ abstract class AbstractWarrior(
         }
     }
 
-    override fun takeDamage(damage: Int) {
-        topicalHealth -= damage
+    override fun takeDamage(damage: Int) = if(this.isKilled) {
+        println("This warrior is dead")
+    } else {
+        when (topicalHealth > damage) {
+            true -> topicalHealth -= damage
+            false -> {
+                topicalHealth = 0
+                isKilled = true
+            }
+        }
+
     }
 }

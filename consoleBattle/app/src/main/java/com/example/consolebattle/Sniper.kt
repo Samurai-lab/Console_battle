@@ -1,16 +1,13 @@
 package com.example.consolebattle
 
-class Sniper( health: Int,
-evasion: Int,
-isKilled: Boolean,
-accuracy: Int,
-weapon: AbstractWeapon,
-topicalHealth: Int
-): AbstractWarrior(health, evasion, isKilled, accuracy, weapon, topicalHealth) {
-
-    //Поменять балансироовку после изменеии рандомайзера
-    override var evasion: Int = 22
-    override var isKilled: Boolean = false
+class Sniper(
+    health: Int = 100,
+    evasion: Int = 22,
+    isKilled: Boolean = false,
+    accuracy: Int = 22,
+    weapon: AbstractWeapon,
+    topicalHealth: Int = health
+) : AbstractWarrior(health, evasion, isKilled, accuracy, weapon, topicalHealth) {
 
     override fun attack(warrior: AbstractWarrior) {
         super.attack(warrior)

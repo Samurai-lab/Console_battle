@@ -1,17 +1,13 @@
 package com.example.consolebattle
 
 class Stormtrooper(
-    health: Int,
-    evasion: Int,
-    isKilled: Boolean,
-    accuracy: Int,
+    health: Int = 150,
+    evasion: Int = 50,
+    isKilled: Boolean = false,
+    accuracy: Int = 50,
     weapon: AbstractWeapon,
-    topicalHealth: Int
+    topicalHealth: Int = health
 ) : AbstractWarrior(health, evasion, isKilled, accuracy, weapon, topicalHealth) {
-
-    //Поменять балансироовку после изменеии рандомайзера
-    override var evasion: Int = 22
-    override var isKilled: Boolean = false
 
     override fun attack(warrior: AbstractWarrior) {
         super.attack(warrior)

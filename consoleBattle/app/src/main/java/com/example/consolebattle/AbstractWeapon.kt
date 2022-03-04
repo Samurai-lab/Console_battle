@@ -4,15 +4,13 @@ package com.example.consolebattle
 class AbstractWeapon(
     private val maxBullet: Int,
     private val fireType: FireType,
+    private val typeOfAmmo: Ammo,
     private val cartridgeMagazine: Stack<Ammo>,
-    private val magazineIsEmpty: Boolean
+    private var magazineIsEmpty: Boolean
 ) {
 
-    private lateinit var typeOfAmmo: Ammo
-
-     fun typeOfBullet(type: Ammo): Ammo {
-        typeOfAmmo = type
-        return type
+    fun getBulletType(): Ammo {
+        return typeOfAmmo
     }
 
     fun getMagazine(): Stack<Ammo> {
@@ -20,15 +18,13 @@ class AbstractWeapon(
     }
 
     fun reloadMagazine() {
-        if (::typeOfAmmo.isInitialized) {
             for (i in 0 until maxBullet) {
-                cartridgeMagazine.push(typeOfBullet(typeOfAmmo))
+                cartridgeMagazine.push(typeOfAmmo)
+                magazineIsEmpty = false
             }
             println("Reloading... \nYour magazine is full")
 
-        } else {
-            println("You should choose type of bullets")
-        }
+
     }
 
     fun checkMagazine(): Boolean {
@@ -43,8 +39,8 @@ class AbstractWeapon(
         for (i in 0 until typeOfFire(fireType).count) {
             if (cartridgeMagazine.isEmpty()) {
                 checkMagazine()
+                magazineIsEmpty = true
                 return
-                break
             } else {
                 cartridgeMagazine.pop()
                 println("Bump!")
