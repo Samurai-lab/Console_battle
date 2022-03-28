@@ -9,7 +9,7 @@ class AbstractWeapon(
     private var magazineIsEmpty: Boolean
 ) {
 
-    fun getBulletType(): Ammo {
+    private fun getBulletType(): Ammo {
         return typeOfAmmo
     }
 
@@ -22,30 +22,32 @@ class AbstractWeapon(
                 cartridgeMagazine.push(typeOfAmmo)
                 magazineIsEmpty = false
             }
-            println("Reloading... \nYour magazine is full")
-
+            println("Reloading... \nWarriors magazine is full")
 
     }
 
     fun checkMagazine(): Boolean {
         when (cartridgeMagazine.getSize() > 0) {
-            true -> println("You have bullets on your magazine - ${cartridgeMagazine.getSize()}")
-            else -> println("Your magazine is empty")
+            true -> println("Warrior have bullets on your magazine - ${cartridgeMagazine.getSize()}")
+            else -> println("Warrior magazine is empty")
         }
-        return magazineIsEmpty == cartridgeMagazine.getSize() <= 0
+        return cartridgeMagazine.getSize() <= 0
     }
 
-    fun fire() {
+    fun fire(): Int {
+        var damage = 0
         for (i in 0 until typeOfFire(fireType).count) {
             if (cartridgeMagazine.isEmpty()) {
                 checkMagazine()
                 magazineIsEmpty = true
-                return
             } else {
                 cartridgeMagazine.pop()
                 println("Bump!")
+                damage += getBulletType().getDamaged()
+                println("Warrior have bullets on your magazine - ${cartridgeMagazine.getSize()}")
             }
         }
+        return damage
     }
 
     private fun typeOfFire(fireType: FireType): FireType =

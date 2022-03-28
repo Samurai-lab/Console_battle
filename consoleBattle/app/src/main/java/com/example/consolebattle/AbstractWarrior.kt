@@ -10,32 +10,28 @@ abstract class AbstractWarrior(
     private var topicalHealth: Int
 ) : Warrior {
 
-    override fun attack(warrior: AbstractWarrior) {
-        if (weapon.checkMagazine()) {
+    val warriorHealth get() = topicalHealth
+    val warriorIsKilled get() = isKilled
 
+    override fun attack(warrior: AbstractWarrior) {
+        if (!weapon.checkMagazine()) {
             //Переделать рандомайз
-            if (accuracy.isEvent() && evasion.isEvent()) {
-                //Урон может быть больше здоровья
-                topicalHealth -=  weapon.getBulletType().getDamaged()
-            } else {
-                println("You missed")
-            }
+            //Урон может быть больше здоровья
+            if (accuracy.isEvent() || evasion.isEvent()) {
+                warrior.takeDamage(weapon.fire())
+            } else println("Warrior missed")
         } else {
-            println("You magazine is empty \nReloading magazine")
             weapon.reloadMagazine()
         }
     }
 
-    override fun takeDamage(damage: Int) = if(this.isKilled) {
+    override fun takeDamage(damage: Int) = if (this.isKilled) {
         println("This warrior is dead")
-    } else {
-        when (topicalHealth > damage) {
-            true -> topicalHealth -= damage
-            false -> {
-                topicalHealth = 0
-                isKilled = true
-            }
+    } else when (topicalHealth > damage) {
+        true -> topicalHealth -= damage
+        false -> {
+            topicalHealth = 0
+            isKilled = true
         }
-
     }
 }

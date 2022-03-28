@@ -30,5 +30,5 @@ class Stack<E> {
 
     fun getSize () = stack.size
 
-    fun allElements() = println(stack)
+    fun getElement (num: Int) = stack[num]
 }
