@@ -5,10 +5,9 @@ import kotlin.random.nextInt
 
 class Battle(private var firstTeam: Team, private var secondTeam: Team) {
 
-    private val battleState = BattleState.Info(firstTeam, secondTeam)
+    private val battleState = Info(firstTeam, secondTeam)
 
     fun getProgress() {
-
         if (teamsHealth()) {
             battleState.progress()
         } else {
@@ -24,7 +23,6 @@ class Battle(private var firstTeam: Team, private var secondTeam: Team) {
             true -> true
             false -> false
         }
-
 
     fun fight() {
         while (teamsHealth()) {
@@ -46,7 +44,5 @@ class Battle(private var firstTeam: Team, private var secondTeam: Team) {
             continue
         }
         getProgress()
-
     }
-
 }

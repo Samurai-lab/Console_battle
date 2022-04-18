@@ -1,5 +1,7 @@
 package com.example.consolebattle
 
+import com.example.consolebattle.exceptions.NoAmmoException
+
 //Task 7
 abstract class AbstractWarrior(
     private val health: Int,
@@ -13,16 +15,15 @@ abstract class AbstractWarrior(
     val warriorHealth get() = topicalHealth
     val warriorIsKilled get() = isKilled
 
+    //try - catch
     override fun attack(warrior: AbstractWarrior) {
-        if (!weapon.checkMagazine()) {
-            //Переделать рандомайз
-            //Урон может быть больше здоровья
             if (accuracy.isEvent() || evasion.isEvent()) {
-                warrior.takeDamage(weapon.fire())
+                try {
+                    warrior.takeDamage(weapon.fire())
+                } catch (n: NoAmmoException) {
+                    weapon.reloadMagazine()
+                }
             } else println("Warrior missed")
-        } else {
-            weapon.reloadMagazine()
-        }
     }
 
     override fun takeDamage(damage: Int) = if (this.isKilled) {

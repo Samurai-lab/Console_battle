@@ -10,13 +10,13 @@ fun main() {
     battle.getProgress()
     battle.fight()
 
-}
+    }
 
 //Task 5
 object Weapons {
 
     fun createPistol(): AbstractWeapon {
-        return AbstractWeapon(9, FireType.Queue(3), Ammo.PISTOL_CARTRIDGES, Stack(), true)
+        return AbstractWeapon(9, FireType.Queue(2), Ammo.PISTOL_CARTRIDGES, Stack(), true)
     }
 
     fun createRevolving(): AbstractWeapon {

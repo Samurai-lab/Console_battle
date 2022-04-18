@@ -1,15 +1,12 @@
 package com.example.consolebattle
 
-sealed class BattleState {
-
-    data class Info(private var firstTeam: Team, private var secondTeam: Team) {
+    data class Info(private val firstTeam: Team, private val secondTeam: Team) {
 
         fun progress() {
             println("""
                 First command have ${warriorsNumbers(firstTeam)} warriors and team health is ${wHealthTeam(firstTeam)} 
                 Second command have ${warriorsNumbers(secondTeam)} warriors and team health is ${wHealthTeam(secondTeam)} 
             """.trimIndent())
-            battleProgress()
         }
 
          private fun warriorsNumbers(team:Team): Int {
@@ -30,12 +27,4 @@ sealed class BattleState {
             }
             return healthCount
         }
-
-        private fun battleProgress() {
-
-        }
-
     }
-
-
-}

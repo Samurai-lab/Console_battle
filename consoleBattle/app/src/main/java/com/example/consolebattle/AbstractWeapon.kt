@@ -1,5 +1,7 @@
 package com.example.consolebattle
 
+import com.example.consolebattle.exceptions.NoAmmoException
+
 //Task 4
 class AbstractWeapon(
     private val maxBullet: Int,
@@ -28,18 +30,20 @@ class AbstractWeapon(
 
     fun checkMagazine(): Boolean {
         when (cartridgeMagazine.getSize() > 0) {
-            true -> println("Warrior have bullets on your magazine - ${cartridgeMagazine.getSize()}")
+            true -> println("Warrior have bullets on his magazine - ${cartridgeMagazine.getSize()}")
             else -> println("Warrior magazine is empty")
         }
         return cartridgeMagazine.getSize() <= 0
     }
 
+    //Exception
     fun fire(): Int {
         var damage = 0
         for (i in 0 until typeOfFire(fireType).count) {
-            if (cartridgeMagazine.isEmpty()) {
+            if (cartridgeMagazine.isEmpty() || cartridgeMagazine.getSize() < typeOfFire(fireType).count) {
                 checkMagazine()
                 magazineIsEmpty = true
+                throw NoAmmoException()
             } else {
                 cartridgeMagazine.pop()
                 println("Bump!")
